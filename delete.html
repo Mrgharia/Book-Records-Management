@@ -1,0 +1,54 @@
+<?php
+$size=sizeof($_POST);
+$j=1;
+for($i=1;$i<=$size;$i++,$j++)
+{
+
+
+$index="b".$j;
+if(isset($_POST[$index]))
+$b_id[$i]=$_POST[$index];
+else 
+	$i--;
+}
+
+$con=mysqli_connect('localhost','root');
+mysqli_select_db($con,'brm_db');
+for($k=1;$k<=$size;$k++)
+{
+
+$q="delete from book where bookid=".$b_id[$k];
+mysqli_query($con,$q);
+}
+mysqli_close($con);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>deletion</title> 
+</head>
+<body style="text-align: center;background-color:PINK">
+
+
+<h1>Book management system</h1>
+<p><?php 
+echo $size." records deleted ";
+
+?>
+<p> 
+	Do you want to view books records
+</p>
+<a href="view.html">CLICK HERE</a>
+<p>DISPLAY deleted  DATA </p>
+<a href="deleteform.html">DISPLAY</a>
+<p>
+	Do you want to delete more data 
+</p>
+<a href="deleteform.html"> click here</a>
+<p>
+	Do you want to insert more data 
+</p>
+<a href="index.html"> click here</a>
+
+</body>
+</html>

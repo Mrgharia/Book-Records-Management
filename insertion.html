@@ -1,0 +1,35 @@
+<?php
+$title=$_POST['title'];
+$price=$_POST['price'];
+$author=$_POST['author'];
+$con=mysqli_connect('localhost','root');
+mysqli_select_db($con,'brm_db');
+$q="INSERT INTO  book(title,price,author)values('$title',$price,'$author')";
+$status=mysqli_query($con,$q);
+mysqli_close($con);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>insertion</title> 
+</head>
+<body style="text-align: center;background-color:ORANGE">
+
+
+<h1>Book management system</h1>
+<p><?php 
+if($status==1)echo "The recored has been inserted  successfully";
+else echo "not inserted";
+?>
+<p> 
+	Do you want to add more data
+</p>
+<a href="index.html">CLICK HERE</a>
+<p>DISPLAY INSERTED DATA </p>
+<a href="view.html">DISPLAY</a>
+<p>
+	do you want to delete the data 
+</p>
+<a href="deleteform.html"> click here</a>
+</body>
+</html>

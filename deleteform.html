@@ -1,0 +1,54 @@
+<?php
+$con=mysqli_connect('localhost','root');
+mysqli_select_db($con,'brm_db');
+$q="SELECT * FROM book";
+$result=mysqli_query($con,$q);
+$num=mysqli_num_rows($result);
+mysqli_close($con);
+?>
+<!DOCTYPE html>
+<html>
+<head>
+   
+	<title>delete book records</title>
+</head>
+<body style="text-align: center;background-color:PINK">
+     
+	<center>
+<h1 style="text-decoration: underline;color: black">BOOK RECORD MANAGEMENT</h1>
+<form action="delete.php" action="post">
+<table style="border-style: solid;border-color: marron;width: 600px;background-color:white;border: 1px,solid,red;border-collapse: collapse;text-align: justify;"
+	
+	<tr>
+	<th>BOOK ID</th>
+    <th>TITLE</th>
+    <th>PRICE</th>
+    <th>AUTHOR</th>
+    <th>select to delete</th>
+
+	</tr>
+	<?php
+	for($i=1;$i<=$num;$i++)
+	{
+     $row=mysqli_fetch_array($result);
+     ?>
+     <tr style="border-collapse: collapse;">
+     <td><?php echo $row['bookid'];?></td> 	
+     <td><?php echo $row['title'];?></td>
+     <td><?php echo $row['price'];?></td>
+     <td><?php echo $row['author'];?></td>
+     <td><input type="checkbox" value="<?php echo $row['bookid'];?>"name="b<?php  echo $i; ?>"></td>
+
+     </tr>
+     <?php 
+ }
+ ?>
+ <tr>
+     <td colspan="5"><input type="submit" value="delete"></td>
+ </tr>
+</center>
+</table>
+</form>
+<a href="delete.html">DELETE</a>
+</body>
+</html>
